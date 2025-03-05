@@ -6,7 +6,7 @@
 #define IDC_GEN_CSR 302
 #define IDC_SIGN_CERT 303
 
-// Обработчик сообщений окна
+// РћР±СЂР°Р±РѕС‚С‡РёРє СЃРѕРѕР±С‰РµРЅРёР№ РѕРєРЅР°
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     static HWND hEdit, hBtnGenCSR, hBtnSignCert;
     char certName[256] = "";
@@ -14,16 +14,16 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
     switch (message)
     {
     case WM_CREATE:
-        CreateWindowA("STATIC", "Введите имя сертификата:", WS_VISIBLE | WS_CHILD,
+        CreateWindowA("STATIC", "Р’РІРµРґРёС‚Рµ РёРјСЏ СЃРµСЂС‚РёС„РёРєР°С‚Р°:", WS_VISIBLE | WS_CHILD,
             20, 20, 200, 20, hWnd, NULL, NULL, NULL);
 
         hEdit = CreateWindowA("EDIT", "", WS_VISIBLE | WS_CHILD | WS_BORDER | ES_AUTOHSCROLL,
             20, 50, 200, 20, hWnd, (HMENU)IDC_CERT_NAME, NULL, NULL);
 
-        hBtnGenCSR = CreateWindowA("BUTTON", "Создать CSR", WS_VISIBLE | WS_CHILD,
+        hBtnGenCSR = CreateWindowA("BUTTON", "РЎРѕР·РґР°С‚СЊ CSR", WS_VISIBLE | WS_CHILD,
             20, 80, 140, 30, hWnd, (HMENU)IDC_GEN_CSR, NULL, NULL);
 
-        hBtnSignCert = CreateWindowA("BUTTON", "Подписать сертификат", WS_VISIBLE | WS_CHILD,
+        hBtnSignCert = CreateWindowA("BUTTON", "РџРѕРґРїРёСЃР°С‚СЊ СЃРµСЂС‚РёС„РёРєР°С‚", WS_VISIBLE | WS_CHILD,
             180, 80, 180, 30, hWnd, (HMENU)IDC_SIGN_CERT, NULL, NULL);
         break;
 
@@ -35,7 +35,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                 generateCSR(certName);
             }
             else {
-                MessageBoxA(hWnd, "Введите имя сертификата!", "Ошибка", MB_OK | MB_ICONERROR);
+                MessageBoxA(hWnd, "Р’РІРµРґРёС‚Рµ РёРјСЏ СЃРµСЂС‚РёС„РёРєР°С‚Р°!", "РћС€РёР±РєР°", MB_OK | MB_ICONERROR);
             }
         }
         else if (LOWORD(wParam) == IDC_SIGN_CERT)
@@ -45,7 +45,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                 signCertificate(certName);
             }
             else {
-                MessageBoxA(hWnd, "Введите имя сертификата!", "Ошибка", MB_OK | MB_ICONERROR);
+                MessageBoxA(hWnd, "Р’РІРµРґРёС‚Рµ РёРјСЏ СЃРµСЂС‚РёС„РёРєР°С‚Р°!", "РћС€РёР±РєР°", MB_OK | MB_ICONERROR);
             }
         }
         break;
@@ -67,7 +67,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     wc.lpszClassName = "CertWindow";
     RegisterClassA(&wc);
 
-    HWND hwnd = CreateWindowA("CertWindow", "Сертификаты PKI", WS_OVERLAPPEDWINDOW,
+    HWND hwnd = CreateWindowA("CertWindow", "РЎРµСЂС‚РёС„РёРєР°С‚С‹ PKI", WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, 400, 200,
         NULL, NULL, hInstance, NULL);
 

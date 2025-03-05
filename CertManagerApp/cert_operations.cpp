@@ -8,22 +8,22 @@
 
 using namespace std;
 
-// Проверка существования папки
+// РџСЂРѕРІРµСЂРєР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ РїР°РїРєРё
 bool directoryExists(const std::string& path) {
     struct stat info;
     return (stat(path.c_str(), &info) == 0 && (info.st_mode & S_IFDIR));
 }
 
-// Создание папки, если её нет
+// РЎРѕР·РґР°РЅРёРµ РїР°РїРєРё, РµСЃР»Рё РµС‘ РЅРµС‚
 void createDirectoryIfNotExists(const std::string& path) {
     if (!directoryExists(path)) {
         if (_mkdir(path.c_str()) != 0) {
-            MessageBoxA(NULL, "Ошибка при создании папки C:/certs!", "Ошибка", MB_OK | MB_ICONERROR);
+            MessageBoxA(NULL, "РћС€РёР±РєР° РїСЂРё СЃРѕР·РґР°РЅРёРё РїР°РїРєРё C:/certs!", "РћС€РёР±РєР°", MB_OK | MB_ICONERROR);
         }
     }
 }
 
-// Функция генерации CSR
+// Р¤СѓРЅРєС†РёСЏ РіРµРЅРµСЂР°С†РёРё CSR
 void generateCSR(const char* certName) {
     std::string certsDir = "C:/certs";
     createDirectoryIfNotExists(certsDir);
@@ -37,14 +37,14 @@ void generateCSR(const char* certName) {
 
     int result = system(csrCommand.c_str());
     if (result != 0) {
-        MessageBoxA(NULL, "Ошибка при создании CSR! Проверьте OpenSSL.", "Ошибка", MB_OK | MB_ICONERROR);
+        MessageBoxA(NULL, "РћС€РёР±РєР° РїСЂРё СЃРѕР·РґР°РЅРёРё CSR! РџСЂРѕРІРµСЂСЊС‚Рµ OpenSSL.", "РћС€РёР±РєР°", MB_OK | MB_ICONERROR);
         return;
     }
 
-    MessageBoxA(NULL, "CSR успешно создан! Файл сохранён в C:/certs/", "Успех", MB_OK | MB_ICONINFORMATION);
+    MessageBoxA(NULL, "CSR СѓСЃРїРµС€РЅРѕ СЃРѕР·РґР°РЅ! Р¤Р°Р№Р» СЃРѕС…СЂР°РЅС‘РЅ РІ C:/certs/", "РЈСЃРїРµС…", MB_OK | MB_ICONINFORMATION);
 }
 
-// Функция подписания сертификата
+// Р¤СѓРЅРєС†РёСЏ РїРѕРґРїРёСЃР°РЅРёСЏ СЃРµСЂС‚РёС„РёРєР°С‚Р°
 void signCertificate(const char* certName) {
     std::string certsDir = "C:/certs";
     createDirectoryIfNotExists(certsDir);
@@ -58,9 +58,9 @@ void signCertificate(const char* certName) {
 
     int result = system(signCommand.c_str());
     if (result != 0) {
-        MessageBoxA(NULL, "Ошибка при подписании сертификата! Проверьте OpenSSL.", "Ошибка", MB_OK | MB_ICONERROR);
+        MessageBoxA(NULL, "РћС€РёР±РєР° РїСЂРё РїРѕРґРїРёСЃР°РЅРёРё СЃРµСЂС‚РёС„РёРєР°С‚Р°! РџСЂРѕРІРµСЂСЊС‚Рµ OpenSSL.", "РћС€РёР±РєР°", MB_OK | MB_ICONERROR);
         return;
     }
 
-    MessageBoxA(NULL, "Сертификат успешно подписан! Файл сохранён в C:/certs/", "Успех", MB_OK | MB_ICONINFORMATION);
+    MessageBoxA(NULL, "РЎРµСЂС‚РёС„РёРєР°С‚ СѓСЃРїРµС€РЅРѕ РїРѕРґРїРёСЃР°РЅ! Р¤Р°Р№Р» СЃРѕС…СЂР°РЅС‘РЅ РІ C:/certs/", "РЈСЃРїРµС…", MB_OK | MB_ICONINFORMATION);
 }
